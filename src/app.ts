@@ -1,4 +1,5 @@
 class ProjectState {
+    private listners: any[] = [];
     private projects: any[] = [];
     private static instance: ProjectState;
 
@@ -10,19 +11,25 @@ class ProjectState {
         if(this.instance){
             return this.instance;
         }
-
         this.instance = new ProjectState();
         return this.instance;
+    }
+
+    addListner(listnerFn: Function) {
+        this.listners.push(listnerFn);
     }
 
     addProject(title: string, description: string, noOfPeople: number) {
         const newProject = {
             id: Math.random().toString(),
-            title,
-            description,
+            title: title,
+            description: description,
             people: noOfPeople
         }
         this.projects.push(newProject);
+        for(const listnerFn of this.listners){
+            listnerFn(this.projects.slice());
+        }
     }
 }
 
@@ -77,22 +84,39 @@ class ProjectList {
     templateElement: HTMLTemplateElement;
     hostElement: HTMLDivElement;
     element: HTMLElement;
+    assignedProjects: any[];
 
     constructor(private type: 'active' | 'finished') {
         this.templateElement = document.getElementById('project-list')! as HTMLTemplateElement;
         this.hostElement = document.getElementById('app')! as HTMLDivElement;
+        this.assignedProjects = [];
 
         const importedNode = document.importNode(this.templateElement.content, true);
         this.element = importedNode.firstElementChild as HTMLFormElement;
         this.element.id =  `${this.type}-projects`;
+
+        projectState.addListner((projects : any[]) => {
+            this.assignedProjects = projects;
+            this.renderProjects();
+        })
+
         this.attach();
         this.renderContent();
     }
 
+    private renderProjects() {
+        const listEl = document.getElementById(`${this.type}-projects-list`)! as HTMLUListElement;
+        for(const prjItem of this.assignedProjects){
+            const listItem = document.createElement('li');
+            listItem.textContent = prjItem.title;
+            listEl.appendChild(listItem);
+        }
+    }
+
     private renderContent() {
-        const listId = `${this.type}-project-list`;
+        const listId = `${this.type}-projects-list`;
         this.element.querySelector('ul')!.id = listId;
-        this.element.querySelector('h1')!.textContent = this.type.toUpperCase() + 'PROJECTS';
+        this.element.querySelector('h2')!.textContent = this.type.toUpperCase() + 'PROJECTS';
     }
 
     private attach() {
