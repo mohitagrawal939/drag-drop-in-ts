@@ -49,12 +49,19 @@ class ProjectInput {
         }
     }
 
+    private clearInputs() {
+        this.titleInputElement.value = '';
+        this.descriptionInputElement.value = '';
+        this.peopleInputElement.value = '';
+    }
+
     @autobind
     private submitHandler(event: Event) {
         event.preventDefault();
         const userInput = this.gatherUserInput();
         if(Array.isArray(userInput)){
             const [title, desc, people] = userInput;
+            this.clearInputs();
         }
     }
 
