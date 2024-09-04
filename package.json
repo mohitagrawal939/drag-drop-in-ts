@@ -4,7 +4,7 @@
   "repository": "https://github.com/mohitagrawal939/redux-toolkit-todo.git",
   "private": true,
   "version": "0.0.1",
-  "author": "mohitagrawal939",
+  "author": "Mohit Agrawal",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
