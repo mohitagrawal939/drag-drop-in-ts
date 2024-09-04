@@ -6,7 +6,7 @@ module.exports = {
     entry: './src/app.ts',
     output: {
         filename: 'bundle.js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'public'),
     },
     devtool: 'hidden-source-map',
     module: {
@@ -22,6 +22,8 @@ module.exports = {
         extensions: ['.ts', '.js']
     },
     plugins: [
-        new CleanPlugin.CleanWebpackPlugin(),
+        new CleanPlugin.CleanWebpackPlugin({
+            cleanOnceBeforeBuildPatterns: ['*.js']
+        }),
     ]
 };
