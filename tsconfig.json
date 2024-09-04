@@ -2,7 +2,7 @@
   "compilerOptions": {
     // Basic options for typescript applications
     "target": "es6",                                  /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */    
-    "module": "commonjs",                                /* Specify what module code is generated. */
+    "module": "amd",                                /* Specify what module code is generated. */
     "lib": [
         "dom",
         "es6",
@@ -61,7 +61,7 @@
     // "declarationMap": true,                           /* Create sourcemaps for d.ts files. */
     // "emitDeclarationOnly": true,                      /* Only output d.ts files and not JavaScript files. */
     // "inlineSourceMap": true,                          /* Include sourcemap files inside the emitted JavaScript. */
-    // "outFile": "./",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
+    "outFile": "./dist/bundle.js",                                  /* Specify a file that bundles all outputs into one JavaScript file. If 'declaration' is true, also designates a file that bundles all .d.ts output. */
     "removeComments": true,                           /* Disable emitting comments. */
     // "noEmit": true,                                   /* Disable emitting files from a compilation. */
     // "importHelpers": true,                            /* Allow importing helper functions from tslib once per project, instead of including them per-file. */
