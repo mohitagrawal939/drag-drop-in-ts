@@ -5,7 +5,7 @@ export function autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
         get() {
             const boundFn = orginalMethod.bind(this);
             return boundFn;
-        }
-    }
+        },
+    };
     return adjDescriptor;
 }

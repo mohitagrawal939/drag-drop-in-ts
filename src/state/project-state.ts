@@ -10,7 +10,7 @@ class State<T> {
     }
 }
 
-export class ProjectState extends State<Project>{
+export class ProjectState extends State<Project> {
     private projects: Project[] = [];
     private static instance: ProjectState;
 
@@ -19,7 +19,7 @@ export class ProjectState extends State<Project>{
     }
 
     static getInstance() {
-        if(this.instance){
+        if (this.instance) {
             return this.instance;
         }
         this.instance = new ProjectState();
@@ -39,15 +39,15 @@ export class ProjectState extends State<Project>{
     }
 
     moveProject(projectId: string, newStatus: ProjectStatus) {
-        const project = this.projects.find(prj => prj.id === projectId);
-        if(project && project.status !== newStatus){
+        const project = this.projects.find((prj) => prj.id === projectId);
+        if (project && project.status !== newStatus) {
             project.status = newStatus;
         }
         this.updateListner();
     }
 
     private updateListner() {
-        for(const listnerFn of this.listners){
+        for (const listnerFn of this.listners) {
             listnerFn(this.projects.slice());
         }
     }

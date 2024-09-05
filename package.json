@@ -1,25 +1,25 @@
 {
-  "name": "drag-drop-in-ts",
-  "description": "Basic HTML web drag and drop API application with typescript in browsers",
-  "repository": "https://github.com/mohitagrawal939/redux-toolkit-todo.git",
-  "private": true,
-  "version": "0.0.1",
-  "author": "Mohit Agrawal",
-  "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server",
-    "build": "webpack",
-    "build:prod": "webpack --config webpack.config.prod.js"
-  },
-  "license": "ISC",
-  "devDependencies": {
-    "clean-webpack-plugin": "^4.0.0",
-    "lite-server": "^2.6.1",
-    "ts-loader": "^9.5.1",
-    "typescript": "^5.5.4",
-    "webpack": "^5.94.0",
-    "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.1.0"
-  }
+    "name": "drag-drop-in-ts",
+    "description": "Basic HTML web drag and drop API application with typescript in browsers",
+    "repository": "https://github.com/mohitagrawal939/redux-toolkit-todo.git",
+    "private": true,
+    "version": "0.0.1",
+    "author": "Mohit Agrawal",
+    "main": "app.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "webpack-dev-server",
+        "build": "webpack",
+        "build:prod": "webpack --config webpack.config.prod.js"
+    },
+    "license": "ISC",
+    "devDependencies": {
+        "clean-webpack-plugin": "^4.0.0",
+        "lite-server": "^2.6.1",
+        "ts-loader": "^9.5.1",
+        "typescript": "^5.5.4",
+        "webpack": "^5.94.0",
+        "webpack-cli": "^5.1.4",
+        "webpack-dev-server": "^5.1.0"
+    }
 }
