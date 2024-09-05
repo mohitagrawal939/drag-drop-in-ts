@@ -1,11 +1,11 @@
 import { autobind } from "../decorators/autobind";
-import { DragTarget } from "../models/drag-drop";
+import { DragTarget, TouchTarget } from "../models/drag-drop";
 import { Project, ProjectStatus } from "../models/project";
 import { projectState } from "../state/project-state";
 import { Component } from "./base-component";
 import { ProjectItem } from "./project-item";
 
-export class ProjectList extends Component<HTMLDivElement, HTMLElement> implements DragTarget {
+export class ProjectList extends Component<HTMLDivElement, HTMLElement> implements DragTarget, TouchTarget {
     assignedProjects: Project[];
 
     constructor(private type: 'active' | 'finished') {
@@ -37,10 +37,37 @@ export class ProjectList extends Component<HTMLDivElement, HTMLElement> implemen
         listEl.classList.remove('droppable');
     }
 
+    @autobind
+    touchOverHandler(event: TouchEvent) {
+        console.log(event);
+        // if(event.dataTransfer && event.dataTransfer.types[0] === 'text/plain'){
+        //     event.preventDefault();
+        //     const listEl = this.element.querySelector('ul')!;
+        //     listEl.classList.add('droppable');
+        // }
+    }
+
+    @autobind
+    touchHandler(event: TouchEvent) {
+        console.log(event);
+        // const prjId = event.dataTransfer!.getData('text/plain');
+        // projectState.moveProject(prjId, this.type === 'active' ? ProjectStatus.Active : ProjectStatus.Finished)
+    }
+
+    @autobind
+    touchLeaveHandler(_: TouchEvent) {
+        console.log(_);
+        // const listEl = this.element.querySelector('ul')!;
+        // listEl.classList.remove('droppable');
+    }
+
     configure() {
         this.element.addEventListener('dragover', this.dragOverHandler);
         this.element.addEventListener('dragleave', this.dragLeaveHandler);
         this.element.addEventListener('drop', this.dragHandler);
+        this.element.addEventListener('touchmove', this.touchOverHandler);
+        this.element.addEventListener('touchcancel', this.touchLeaveHandler);
+        this.element.addEventListener('touchend', this.touchHandler);
         projectState.addListner((projects : Project[]) => {
             const relevantProjects = projects.filter(prj => {
                 if(this.type === 'active'){

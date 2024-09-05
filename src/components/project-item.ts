@@ -1,9 +1,9 @@
 import { autobind } from "../decorators/autobind";
-import { Draggable } from "../models/drag-drop";
+import { Draggable, Touchable } from "../models/drag-drop";
 import { Project } from "../models/project";
 import { Component } from "./base-component";
 
-export class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> implements Draggable { 
+export class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> implements Draggable, Touchable { 
     private project: Project;
 
     get persons() {
@@ -24,16 +24,35 @@ export class ProjectItem extends Component<HTMLUListElement, HTMLLIElement> impl
 
     @autobind
     dragStartHandler(event: DragEvent) {
+        console.log(event);
         event.dataTransfer!.setData('text/plain', this.project.id);
         event.dataTransfer!.effectAllowed = 'move';
+    }
+
+    @autobind
+    toushStartHandler(event: TouchEvent) {
+        console.log(event);
+        // let touchLocation = event.targetTouches[0];
+        //Gets element data
+        let currentElement = event.target!;
+        //Gets element id
+        let currentElementId = currentElement;
+        console.log(currentElementId);
+        // event.dataTransfer!.setData('text/plain', this.project.id);
+        // event.dataTransfer!.effectAllowed = 'move';
     }
 
     dragEndHandler(_: DragEvent) {
         console.log('DragEnd');
     }
 
+    toushEndHandler(_: TouchEvent) {
+        console.log('TouchEnd');
+    }
+
     configure() {
         this.element.addEventListener('dragstart', this.dragStartHandler);
+        this.element.addEventListener('touchstart', this.toushStartHandler);
     }
 
     renderContent() {
