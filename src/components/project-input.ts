@@ -41,13 +41,12 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
         const descriptionValidatable: Validatable = {
             value: enteredDescription,
             required: true,
-            minLength: 5,
         };
         const peopleValidatatble: Validatable = {
             value: +enteredPeople,
             required: true,
             min: 1,
-            max: 5,
+            max: 500,
         };
 
         if (
@@ -55,7 +54,15 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
             !validate(descriptionValidatable) ||
             !validate(peopleValidatatble)
         ) {
-            alert("Invalid input, Please try again!!!");
+            if (!validate(titleValidatable)) {
+                alert("Invalid project title !!!");
+            } else if (!validate(descriptionValidatable)) {
+                alert("Invalid project description !!!");
+            } else if (!validate(peopleValidatatble)) {
+                alert("Invalid project people !!!");
+            } else {
+                alert("Invalid input, Please try again !!!");
+            }
             return;
         } else {
             return [enteredTitle, enteredDescription, +enteredPeople];
