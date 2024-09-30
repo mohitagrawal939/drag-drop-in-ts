@@ -3,7 +3,7 @@
     "description": "Basic HTML web drag and drop API application with typescript in browsers",
     "repository": "https://github.com/mohitagrawal939/redux-toolkit-todo.git",
     "private": true,
-    "version": "0.0.2",
+    "version": "0.0.3",
     "author": "Mohit Agrawal",
     "main": "app.js",
     "scripts": {
